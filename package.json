@@ -1,0 +1,19 @@
+{
+  "name": "esusu",
+  "version": "1.0.0",
+  "description": "Platform that helps members of a group save a fixed amount automatically every week, with one of the members collecting the money at the end of every month.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Martins Anerua",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.3",
+    "mongoose": "^6.3.0"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "supertest": "^6.2.2"
+  }
+}
