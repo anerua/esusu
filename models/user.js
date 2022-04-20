@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true,
         minlength: 3,
-        maxlength: 64,
+        maxlength: 32,
         trim: true
     },
     email: {
@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 10,
-        maxlength: 1024
+        maxlength: 255
     },
     groups: [new mongoose.Schema({
         groupName: {
@@ -51,3 +51,21 @@ const userSchema = new mongoose.Schema({
         }
     })]
 });
+
+const User = mongoose.model('User', userSchema);
+
+function validateUser(user) {
+    const schema = Joi.object({
+        firstName: Joi.string().min(2).max(255).required(),
+        lastName: Joi.string().min(2).max(255).required(),
+        username: Joi.string().min(3).max(32).required().trim(),
+        email: Joi.string().required().email(),
+        password: Joi.string().min(10).max(255).required(),
+        groups: Joi.array().min(0).items(Joi.objectId())
+    });
+
+    return schema.validate(user);
+}
+
+exports.User = User;
+exports.validate = validateUser;
